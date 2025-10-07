@@ -157,8 +157,11 @@ save.addEventListener("click",()=>{
 window.addEventListener("load",()=>{
 	search.focus();
 	const links = localStorage.getItem("data").split("\n");
-	console.log(links)
 	for(let i = 0;i < links.length;++i){
+		let line = links[i].split(' ');
+		let name = '';
+		if(line.length > 1) name = line.slice(1).join(' '); 
+		else name = line[0].split(".").slice(0,-1).join(".");
 		marks.innerHTML +=
 		  '<a class="sa '
 		+ 'text-white/50 '
@@ -167,8 +170,8 @@ window.addEventListener("load",()=>{
 		+ 'max-h-[5rem] '
 		+ 'rounded-xl '
 		+ 'flex flex-row '
-		+ 'items-center" href="' 
-		+ links[i] 
+		+ 'items-center" href="https://' 
+		+ line[0]
 		+ '">'
 		+ '<p class="'
 		+ 'bg-white/50 '
@@ -182,9 +185,9 @@ window.addEventListener("load",()=>{
 		+ 'mr-3 '
 		+ 'font-black '
 		+ '">'
-		+ links[i].split("/")[2][0].toUpperCase()
+		+ name[0].toUpperCase()
 		+ '</p>'
-		+ links[i].split("/")[2].split(".").slice(0,-1).join(".")
+		+ name
 		+ '</a>';
 	}
 });
