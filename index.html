@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=edit,save" />
+		<meta charset="UTF-8" />
+		<title>realchill</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+	</head>
+	<body class="bg-[#004444]">
+
+		<video class="
+			z-[-10]
+			fixed
+			blur-sm
+			h-lvh max-w-[inherit]
+			place-self-center"
+			src="pixelart-japan.mp4"
+			autoplay="{true}" loop muted
+			>
+		</video>
+		
+		<button class="
+			size-10 
+			fixed
+			right-4
+			bottom-4
+			bg-[#141516] 
+			rounded-3xl
+			p-2 z-5"
+			id="edit"
+			>
+			<span class="
+				material-symbols-outlined
+				text-white/50"
+				>edit</span>
+		</button>
+		
+		<div class="
+			text-amber-200/50
+			absolute
+			h-lvh w-full
+			bg-[#00000077]"
+			id="props" 
+			style="display:none;" 
+			>
+			
+			<textarea class="
+				h-full w-full"
+				id="data"
+				>
+			</textarea>
+
+			<button class="
+				size-10
+				fixed
+				right-4 bottom-20
+				bg-[#141516]
+				rounded-3xl 
+				p-2"
+				id="save"
+				>
+				<span class="
+					material-symbols-outlined
+					text-white/50"
+					>save
+				</span>
+			</button>
+		</div>
+		
+		<div class="
+			flex flex-col
+			bg-[#00000066]
+			w-full h-lvh
+			items-center"
+			>
+				<div class="
+					flex flex-col
+					items-center
+					justify-end
+					w-3/5 h-lvh
+					ch-glow"
+					>
+					<input class="
+					w-9/10 
+					my-auto 
+					text-2xl 
+					text-white" 
+					type="text" id="search"
+					>
+				<div class="
+					w-full
+					h-3/5
+					rounded-t-xl
+					bg-[#141516]
+					grid md:grid-cols-4 sm:grid-cols-2
+					auto-rows-[5rem] gap-5 
+					p-4" 
+					id="marks"
+					>
+				</div>
+			</div>
+		</div>
+		<style>
+:root{
+	--default-font-family: monospace 'FiraCode Nerd Font';
+}
+input{
+outline: none;
+}
+.ch-glow{
+	box-shadow: 0 -10rem 20rem -4rem white inset, 0 -10rem 0 1px white inset;
+}
+.sa{
+	user-select: none;
+	transition: 0.3s;
+	transform: translateY(0rem);
+	box-shadow: 0 0.6rem 0 0 #101010;
+}
+.sa:hover{
+	transform: translateY(0.2rem);
+	box-shadow: 0 0.4rem 0 0 #101010;
+}
+		</style>
+		<script>
+let props_display = "none";
+const edit = document.getElementById("edit");
+const search = document.getElementById("search");
+const props = document.getElementById("props");
+const save = document.getElementById("save");
+const data = document.getElementById("data");
+const marks = document.getElementById("marks");
+
+document.addEventListener("keypress",(event)=>{
+	if(event.keyCode === 13) window.location = "https://duckduckgo.com/?q=" + search.value;
+});
+
+edit.addEventListener("click", ()=>{
+	if(props_display === "none"){
+		data.value = localStorage.getItem("data");
+		props_display = "block"
+	} else {
+		props_display = "none";
+	}
+	props.style.display = props_display;
+});		
+
+save.addEventListener("click",()=>{
+	localStorage.setItem("data", data.value);
+});
+
+window.addEventListener("load",()=>{
+	search.focus();
+	const links = localStorage.getItem("data").split("\n");
+	console.log(links)
+	for(let i = 0;i < links.length;++i){
+		marks.innerHTML +=
+		  '<a class="sa '
+		+ 'text-white/50 '
+		+ 'p-3 '
+		+ 'bg-[#1A1D20] '
+		+ 'max-h-[5rem] '
+		+ 'rounded-xl '
+		+ 'flex flex-row '
+		+ 'items-center" href="' 
+		+ links[i] 
+		+ '">'
+		+ '<p class="'
+		+ 'bg-white/50 '
+		+ 'text-[#1A1D20] '
+		+ 'rounded-3xl '
+		+ 'size-8 '
+		+ 'flex flex-col '
+		+ 'items-center '
+		+ 'justify-center '
+		+ 'font-[Outfit] '
+		+ 'mr-3 '
+		+ 'font-black '
+		+ '">'
+		+ links[i].split("/")[2][0].toUpperCase()
+		+ '</p>'
+		+ links[i].split("/")[2].split(".").slice(0,-1).join(".")
+		+ '</a>';
+	}
+});
+
+		</script>
+	</body>
+</html>
