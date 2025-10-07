@@ -132,15 +132,19 @@ const save = document.getElementById("save");
 const data = document.getElementById("data");
 const marks = document.getElementById("marks");
 
+let is_edit = false;
+
 document.addEventListener("keypress",(event)=>{
-	if(event.keyCode === 13) window.location = "https://duckduckgo.com/?q=" + search.value;
+	if(event.keyCode === 13 && !is_edit) window.location = "https://duckduckgo.com/?q=" + search.value;
 });
 
 edit.addEventListener("click", ()=>{
 	if(props_display === "none"){
+		is_edit = true;
 		data.value = localStorage.getItem("data");
 		props_display = "block"
 	} else {
+		is_edit = false;
 		props_display = "none";
 	}
 	props.style.display = props_display;
