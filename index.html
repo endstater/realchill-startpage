@@ -79,8 +79,18 @@
 					flex flex-col
 					items-center
 					justify-end
-					w-3/5 h-lvh
-					ch-glow"
+					w-3/5 h-15/16"
+					>
+					<div class="
+						flex flex-col
+						items-center
+						justify-end
+						ch-glow
+						w-full
+						mb-[3rem]
+						h-1/16
+						rounded-3xl
+						"
 					>
 					<input class="
 					w-9/10 
@@ -89,13 +99,15 @@
 					text-white" 
 					type="text" id="search"
 					>
+					</div>
 				<div class="
 					w-full
 					h-3/5
-					rounded-t-xl
+					rounded-xl
 					bg-[#141516]
 					grid md:grid-cols-4 sm:grid-cols-2
 					auto-rows-[5rem] gap-5 
+					z-2
 					p-4" 
 					id="marks"
 					>
@@ -110,7 +122,7 @@ input{
 outline: none;
 }
 .ch-glow{
-	box-shadow: 0 -10rem 20rem -4rem white inset, 0 -10rem 0 1px white inset;
+	box-shadow: 0 0rem 10rem -5rem white inset, 0rem 0rem 0.2rem 0.2rem #ffffff33 inset;
 }
 .sa{
 	user-select: none;
@@ -124,6 +136,17 @@ outline: none;
 }
 		</style>
 		<script>
+
+			colors = {
+				'r':'#dd8888',
+				'o':'#ddaa88',
+				'y':'#dddd88',
+				'g':'#88dd88',
+				'b':'#88aadd',
+				'i':'#8888dd',
+				'v':'#cc88dd',
+			}
+
 let props_display = "none";
 const edit = document.getElementById("edit");
 const search = document.getElementById("search");
@@ -158,8 +181,10 @@ window.addEventListener("load",()=>{
 	search.focus();
 	const links = localStorage.getItem("data").split("\n");
 	for(let i = 0;i < links.length;++i){
+		let color = '#CACBCC';
 		let line = links[i].split(' ');
 		let name = '';
+		if(line.length > 2)	color = colors[line.pop()];
 		if(line.length > 1) name = line.slice(1).join(' '); 
 		else name = line[0].split(".").slice(0,-1).join(".");
 		marks.innerHTML +=
@@ -174,7 +199,7 @@ window.addEventListener("load",()=>{
 		+ line[0]
 		+ '">'
 		+ '<p class="'
-		+ 'bg-white/50 '
+		+ 'bg-[' + color + '] '
 		+ 'text-[#1A1D20] '
 		+ 'rounded-3xl '
 		+ 'size-8 '
