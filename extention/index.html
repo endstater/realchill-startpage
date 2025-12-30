@@ -3,10 +3,11 @@
 	<head>
 		<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=edit,save" />
+    <link rel="icon" type="image/png" href="icon.png"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta charset="UTF-8" />
 		<title>realchill</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+		<script src="tailwind.js"></script>
 	</head>
 	<body class="bg-[#004444]">
 
@@ -121,7 +122,7 @@
 	--default-font-family: monospace 'FiraCode Nerd Font';
 }
 input{
-outline: none;
+  outline: none;
 }
 .ch-glow{
 	box-shadow: 0 0rem 10rem -5rem white inset, 0rem 0rem 0.2rem 0.2rem #ffffff33 inset;
@@ -138,88 +139,6 @@ outline: none;
 	box-shadow: 0 0.4rem 0 0 #101010;
 }
 		</style>
-		<script>
-
-			colors = {
-				'r':'#dd8888',
-				'o':'#ddaa88',
-				'y':'#dddd88',
-				'g':'#88dd88',
-				'b':'#88aadd',
-				'i':'#8888dd',
-				'v':'#cc88dd',
-			}
-
-let props_display = "none";
-const edit = document.getElementById("edit");
-const search = document.getElementById("search");
-const props = document.getElementById("props");
-const save = document.getElementById("save");
-const data = document.getElementById("data");
-const marks = document.getElementById("marks");
-
-let is_edit = false;
-
-document.addEventListener("keypress",(event)=>{
-	if(event.keyCode === 13 && !is_edit) window.location = "https://duckduckgo.com/?q=" + search.value;
-});
-
-edit.addEventListener("click", ()=>{
-	if(props_display === "none"){
-		is_edit = true;
-		data.value = localStorage.getItem("data");
-		props_display = "block"
-	} else {
-		is_edit = false;
-		props_display = "none";
-	}
-	props.style.display = props_display;
-});		
-
-save.addEventListener("click",()=>{
-	localStorage.setItem("data", data.value);
-});
-
-window.addEventListener("load",()=>{
-	search.focus();
-	const links = localStorage.getItem("data").split("\n");
-	for(let i = 0;i < links.length;++i){
-		let color = '#CACBCC';
-		let line = links[i].split(' ');
-		let name = '';
-		if(line.length > 2 && line[line.length-1] in colors)	color = colors[line.pop()];
-		if(line.length > 1) name = line.slice(1).join(' '); 
-		else name = line[0].split(".").slice(0,-1).join(".");
-		marks.innerHTML +=
-		  '<a class="sa '
-		+ 'text-white/50 '
-		+ 'p-3 '
-		+ 'bg-[#1A1D20] '
-		+ 'max-h-[5rem] '
-		+ 'rounded-xl '
-		+ 'flex flex-row '
-		+ 'items-center" href="https://' 
-		+ line[0]
-		+ '">'
-		+ '<p class="'
-		+ 'bg-[' + color + '] '
-		+ 'text-[#1A1D20] '
-		+ 'rounded-3xl '
-		+ 'size-8 '
-		+ 'flex flex-col '
-		+ 'items-center '
-		+ 'justify-center '
-		+ 'font-[Outfit] '
-		+ 'mr-3 '
-		+ 'font-black '
-		+ '">'
-		+ name[0].toUpperCase()
-		+ '</p>'
-		+ name
-		+ '</a>';
-	}
-});
-
-		</script>
+		<script src="page.js"></script>
 	</body>
 </html>
