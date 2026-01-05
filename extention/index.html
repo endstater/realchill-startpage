@@ -15,7 +15,7 @@
 			z-[-10]
 			fixed
 			blur-sm
-			h-lvh max-w-[inherit]
+      w-lvw
 			place-self-center"
 			src="pixelart-japan.mp4"
 			autoplay="{true}" loop muted
@@ -43,11 +43,11 @@
 			absolute
 			h-lvh w-full
 			z-4
+      hide
 			bg-[#00000077]"
 			id="props" 
-			style="display:none;" 
 			>
-			
+      <p class="text-amber-400">example.com Example o</p>
 			<textarea class="
 				h-full w-full"
 				id="data"
@@ -137,6 +137,16 @@ input{
 .sa:hover{
 	transform: translateY(0.2rem);
 	box-shadow: 0 0.4rem 0 0 #101010;
+}
+#props{
+  transition: all 1s;
+  padding: 3rem;
+}
+textarea{
+    outline: none;
+}
+.hide{
+ display: none;
 }
 		</style>
 		<script src="page.js"></script>
