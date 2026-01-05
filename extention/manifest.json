@@ -1,7 +1,7 @@
 {
 "manifest_version": 2,
   "name": "Realchill Startpage",
-  "version": "0.2",
+  "version": "0.2.5",
   "permissions": ["activeTab"], 
   "chrome_url_overrides": {
     "newtab": "index.html"
